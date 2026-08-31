@@ -1,0 +1,579 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socially - Home</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f5f7;
+            color: #222;
+        }
+
+        /* Navbar */
+        .navbar {
+            height: 70px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+            color: #7c3aed;
+        }
+
+        .search {
+            width: 300px;
+            background: #f1f1f5;
+            border-radius: 25px;
+            padding: 12px 18px;
+            border: none;
+            outline: none;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 25px;
+            font-size: 22px;
+            align-items: center;
+        }
+
+        .profile-small {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Main */
+        .container {
+            max-width: 1150px;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+        }
+
+        /* Stories */
+        .stories {
+            background: white;
+            padding: 18px;
+            border-radius: 18px;
+            display: flex;
+            gap: 18px;
+            overflow-x: auto;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+        }
+
+        .story {
+            min-width: 75px;
+            text-align: center;
+        }
+
+        .story img {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #8b5cf6;
+            padding: 2px;
+        }
+
+        .story p {
+            margin-top: 7px;
+            font-size: 12px;
+        }
+
+        /* Create Post */
+        .create-post {
+            background: white;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+        }
+
+        .post-input {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .post-input img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+        }
+
+        .post-input input {
+            flex: 1;
+            border: none;
+            background: #f3f3f6;
+            padding: 13px 18px;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 18px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .post-actions span {
+            cursor: pointer;
+            color: #666;
+        }
+
+        .post-actions span:hover {
+            color: #7c3aed;
+        }
+
+        /* Post */
+        .post {
+            background: white;
+            margin-top: 20px;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 18px;
+            gap: 12px;
+        }
+
+        .post-header img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .post-user {
+            font-weight: bold;
+        }
+
+        .post-time {
+            font-size: 12px;
+            color: #888;
+            margin-top: 3px;
+        }
+
+        .post-menu {
+            margin-left: auto;
+            font-size: 20px;
+        }
+
+        .post-text {
+            padding: 0 18px 18px;
+            line-height: 1.5;
+        }
+
+        .post-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .post-bottom {
+            padding: 15px 18px;
+        }
+
+        .post-buttons {
+            display: flex;
+            gap: 22px;
+            font-size: 23px;
+        }
+
+        .post-buttons span {
+            cursor: pointer;
+        }
+
+        .likes {
+            font-weight: bold;
+            margin-top: 12px;
+        }
+
+        .caption {
+            margin-top: 7px;
+            color: #444;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: 18px;
+            padding: 20px;
+            height: fit-content;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+        }
+
+        .sidebar-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .suggestion {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .suggestion img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .suggestion-info {
+            flex: 1;
+        }
+
+        .suggestion-name {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .follow {
+            color: #7c3aed;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #999;
+            line-height: 1.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 850px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 0 15px;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .search {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .search {
+                display: none;
+            }
+
+            .nav-icons {
+                gap: 15px;
+            }
+
+            .container {
+                margin-top: 15px;
+            }
+
+            .post-image {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">Socially.</div>
+
+        <input
+            type="text"
+            class="search"
+            placeholder="Search Socially..."
+        >
+
+        <div class="nav-icons">
+            <span>⌂</span>
+            <span>♡</span>
+            <span>✉</span>
+            <img
+                class="profile-small"
+                src="https://i.pravatar.cc/150?img=12"
+                alt="Profile"
+            >
+        </div>
+    </nav>
+
+
+    <main class="container">
+
+        <section>
+
+            <!-- Stories -->
+            <div class="stories">
+
+                <div class="story">
+                    <img src="https://i.pravatar.cc/150?img=12">
+                    <p>Your Story</p>
+                </div>
+
+                <div class="story">
+                    <img src="https://i.pravatar.cc/150?img=5">
+                    <p>Alex</p>
+                </div>
+
+                <div class="story">
+                    <img src="https://i.pravatar.cc/150?img=8">
+                    <p>Sarah</p>
+                </div>
+
+                <div class="story">
+                    <img src="https://i.pravatar.cc/150?img=11">
+                    <p>David</p>
+                </div>
+
+                <div class="story">
+                    <img src="https://i.pravatar.cc/150?img=32">
+                    <p>Emma</p>
+                </div>
+
+                <div class="story">
+                    <img src="https://i.pravatar.cc/150?img=14">
+                    <p>Ryan</p>
+                </div>
+
+                <div class="story">
+                    <img src="https://i.pravatar.cc/150?img=44">
+                    <p>Mia</p>
+                </div>
+
+            </div>
+
+
+            <!-- Create Post -->
+            <div class="create-post">
+
+                <div class="post-input">
+                    <img src="https://i.pravatar.cc/150?img=12">
+
+                    <input
+                        type="text"
+                        placeholder="What's on your mind?"
+                    >
+                </div>
+
+                <div class="post-actions">
+                    <span>📷 Photo</span>
+                    <span>🎥 Video</span>
+                    <span>😊 Feeling</span>
+                </div>
+
+            </div>
+
+
+            <!-- Post 1 -->
+            <article class="post">
+
+                <div class="post-header">
+
+                    <img src="https://i.pravatar.cc/150?img=5">
+
+                    <div>
+                        <div class="post-user">Alex Morgan</div>
+                        <div class="post-time">2 hours ago</div>
+                    </div>
+
+                    <div class="post-menu">•••</div>
+
+                </div>
+
+                <div class="post-text">
+                    Nothing beats a peaceful evening with a beautiful view. 🌅
+                </div>
+
+                <img
+                    class="post-image"
+                    src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
+                    alt="Beautiful landscape"
+                >
+
+                <div class="post-bottom">
+
+                    <div class="post-buttons">
+                        <span>♡</span>
+                        <span>💬</span>
+                        <span>↗</span>
+                        <span style="margin-left:auto;">🔖</span>
+                    </div>
+
+                    <div class="likes">
+                        1,248 likes
+                    </div>
+
+                    <div class="caption">
+                        <b>Alex Morgan</b> Enjoying the little moments. ✨
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- Post 2 -->
+            <article class="post">
+
+                <div class="post-header">
+
+                    <img src="https://i.pravatar.cc/150?img=8">
+
+                    <div>
+                        <div class="post-user">Sarah Williams</div>
+                        <div class="post-time">5 hours ago</div>
+                    </div>
+
+                    <div class="post-menu">•••</div>
+
+                </div>
+
+                <div class="post-text">
+                    Coffee, code and a little bit of creativity. ☕💻
+                </div>
+
+                <img
+                    class="post-image"
+                    src="https://images.unsplash.com/photo-1499750310107-5fef28a66643"
+                    alt="Workspace"
+                >
+
+                <div class="post-bottom">
+
+                    <div class="post-buttons">
+                        <span>♡</span>
+                        <span>💬</span>
+                        <span>↗</span>
+                        <span style="margin-left:auto;">🔖</span>
+                    </div>
+
+                    <div class="likes">
+                        842 likes
+                    </div>
+
+                    <div class="caption">
+                        <b>Sarah Williams</b> Building something amazing today.
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- Right Sidebar -->
+        <aside class="sidebar">
+
+            <div class="sidebar-title">
+                Suggested for you
+            </div>
+
+            <div class="suggestion">
+
+                <img src="https://i.pravatar.cc/150?img=21">
+
+                <div class="suggestion-info">
+                    <div class="suggestion-name">James Lee</div>
+                    <small>Suggested for you</small>
+                </div>
+
+                <div class="follow">Follow</div>
+
+            </div>
+
+
+            <div class="suggestion">
+
+                <img src="https://i.pravatar.cc/150?img=25">
+
+                <div class="suggestion-info">
+                    <div class="suggestion-name">Sophia Kim</div>
+                    <small>Suggested for you</small>
+                </div>
+
+                <div class="follow">Follow</div>
+
+            </div>
+
+
+            <div class="suggestion">
+
+                <img src="https://i.pravatar.cc/150?img=36">
+
+                <div class="suggestion-info">
+                    <div class="suggestion-name">Daniel Smith</div>
+                    <small>Suggested for you</small>
+                </div>
+
+                <div class="follow">Follow</div>
+
+            </div>
+
+
+            <div class="suggestion">
+
+                <img src="https://i.pravatar.cc/150?img=47">
+
+                <div class="suggestion-info">
+                    <div class="suggestion-name">Olivia Brown</div>
+                    <small>Suggested for you</small>
+                </div>
+
+                <div class="follow">Follow</div>
+
+            </div>
+
+
+            <div class="footer">
+                About · Help · Privacy · Terms · Careers<br>
+                © 2026 Socially
+            </div>
+
+        </aside>
+
+    </main>
+
+</body>
+</html>
+```

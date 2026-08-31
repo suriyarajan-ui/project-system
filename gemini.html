@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse — Professional Workspace</title>
+  <!-- Google Fonts: Inter for high-readability professional UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* CSS Variables for Professional Dark/Neutral Palette */
+    :root {
+      --bg-surface: #0b0f17;
+      --card-bg: #111827;
+      --card-border: #1f2937;
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      --brand-primary: #6366f1;
+      --brand-hover: #4f46e5;
+      --brand-alpha: rgba(99, 102, 241, 0.12);
+      --accent-green: #10b981;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg-surface);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Top Navigation Bar */
+    .top-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--brand-primary);
+      border-radius: var(--radius-sm);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 0.85rem;
+    }
+
+    .global-search {
+      position: relative;
+      width: 380px;
+    }
+
+    .global-search input {
+      width: 100%;
+      background: #1f2937;
+      border: 1px solid transparent;
+      padding: 8px 14px 8px 36px;
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .global-search input:focus {
+      outline: none;
+      border-color: var(--brand-primary);
+      background: var(--card-bg);
+    }
+
+    .global-search i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .icon-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1rem;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      transition: 0.2s;
+    }
+
+    .icon-btn:hover {
+      background: var(--card-border);
+      color: var(--text-primary);
+    }
+
+    /* Layout grid */
+    .app-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr 320px;
+      max-width: 1360px;
+      width: 100%;
+      margin-top: 60px;
+      padding: 24px;
+      gap: 24px;
+    }
+
+    /* Navigation Sidebar */
+    .sidebar-nav {
+      position: sticky;
+      top: 84px;
+      height: calc(100vh - 108px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .nav-section {
+      margin-bottom: 24px;
+    }
+
+    .nav-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 12px;
+      padding-left: 12px;
+    }
+
+    .menu-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .menu-item a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .menu-item a:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+    }
+
+    .menu-item.active a {
+      background: var(--brand-alpha);
+      color: var(--brand-primary);
+      font-weight: 600;
+    }
+
+    /* Profile Badge Sidebar */
+    .profile-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .profile-avatar {
+      position: relative;
+    }
+
+    .avatar-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .status-badge {
+      width: 10px;
+      height: 10px;
+      background: var(--accent-green);
+      border: 2px solid var(--card-bg);
+      border-radius: 50%;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+    .profile-details h4 {
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .profile-details p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Central Main Feed */
+    .main-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* High-Level Network Metrics Bar */
+    .metrics-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .metric-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+
+    .metric-card p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .metric-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .metric-change {
+      font-size: 0.75rem;
+      color: var(--accent-green);
+      margin-left: 6px;
+      font-weight: 500;
+    }
+
+    /* Compose Post Box */
+    .composer-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .composer-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      resize: none;
+      min-height: 70px;
+      outline: none;
+    }
+
+    .composer-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--card-border);
+      padding-top: 14px;
+      margin-top: 8px;
+    }
+
+    .attach-options {
+      display: flex;
+      gap: 8px;
+    }
+
+    .attach-btn {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+    }
+
+    .attach-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+    }
+
+    .btn-primary {
+      background: var(--brand-primary);
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--brand-hover);
+    }
+
+    /* Feed Post Component */
+    .post-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+    }
+
+    .post-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .author-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-info h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .verified-badge {
+      color: var(--brand-primary);
+      font-size: 0.8rem;
+    }
+
+    .author-info p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .post-body {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .post-media {
+      width: 100%;
+      border-radius: var(--radius-md);
+      max-height: 360px;
+      object-fit: cover;
+      margin-bottom: 16px;
+      border: 1px solid var(--card-border);
+    }
+
+    .post-actions {
+      display: flex;
+      gap: 20px;
+      border-top: 1px solid var(--card-border);
+      padding-top: 14px;
+    }
+
+    .action-link {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .action-link:hover {
+      color: var(--brand-primary);
+    }
+
+    /* Right Section / Insights Widget */
+    .widgets-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .panel-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .panel-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .network-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .network-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .network-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .network-user img {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+    }
+
+    .network-details h5 {
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .network-details p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-primary);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: var(--brand-primary);
+      border-color: var(--brand-primary);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1100px) {
+      .app-layout { grid-template-columns: 200px 1fr; }
+      .widgets-panel { display: none; }
+    }
+    @media (max-width: 768px) {
+      .app-layout { grid-template-columns: 1fr; }
+      .sidebar-nav { display: none; }
+      .global-search { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fixed Top Header -->
+  <header class="top-header">
+    <div class="brand-logo">
+      <div class="brand-icon"><i class="fa-solid fa-cube"></i></div>
+      <span>Pulse OS</span>
+    </div>
+
+    <div class="global-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search projects, members, or insights...">
+    </div>
+
+    <div class="header-actions">
+      <button class="icon-btn" title="Notifications"><i class="fa-regular fa-bell"></i></button>
+      <button class="icon-btn" title="Messages"><i class="fa-regular fa-comment-dots"></i></button>
+      <button class="icon-btn" title="Settings"><i class="fa-solid fa-sliders"></i></button>
+    </div>
+  </header>
+
+  <!-- Main Application Layout -->
+  <div class="app-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar-nav">
+      <div>
+        <div class="nav-section">
+          <div class="nav-title">Navigation</div>
+          <ul class="menu-list">
+            <li class="menu-item active"><a href="#"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+            <li class="menu-item"><a href="#"><i class="fa-regular fa-folder-open"></i> Projects</a></li>
+            <li class="menu-item"><a href="#"><i class="fa-regular fa-user-group"></i> Community</a></li>
+            <li class="menu-item"><a href="#"><i class="fa-regular fa-bookmark"></i> Library</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-title">Workspaces</div>
+          <ul class="menu-list">
+            <li class="menu-item"><a href="#"><i class="fa-solid fa-hashtag"></i> System Design</a></li>
+            <li class="menu-item"><a href="#"><i class="fa-solid fa-hashtag"></i> Library LMS</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Logged In User Profile Card -->
+      <div class="profile-card">
+        <div class="profile-avatar">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" class="avatar-img" alt="Suriya">
+          <div class="status-badge"></div>
+        </div>
+        <div class="profile-details">
+          <h4>Suriya</h4>
+          <p>Lead Engineer</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-feed">
+
+      <!-- High-Level KPI / Metrics Row -->
+      <div class="metrics-bar">
+        <div class="metric-card">
+          <p>Weekly Engagement</p>
+          <h3>24.8k <span class="metric-change">+12%</span></h3>
+        </div>
+        <div class="metric-card">
+          <p>Active Collaborators</p>
+          <h3>1,420 <span class="metric-change">+8%</span></h3>
+        </div>
+        <div class="metric-card">
+          <p>Project Deliverables</p>
+          <h3>98.4% <span class="metric-change">+2%</span></h3>
+        </div>
+      </div>
+
+      <!-- Professional Composer Box -->
+      <div class="composer-card">
+        <textarea class="composer-input" placeholder="Share an update, snippet, or milestone with your team..."></textarea>
+        <div class="composer-footer">
+          <div class="attach-options">
+            <button class="attach-btn"><i class="fa-solid fa-paperclip"></i> File</button>
+            <button class="attach-btn"><i class="fa-solid fa-code"></i> Code</button>
+            <button class="attach-btn"><i class="fa-regular fa-image"></i> Media</button>
+          </div>
+          <button class="btn-primary">Publish Update</button>
+        </div>
+      </div>
+
+      <!-- Post Feed Item 1 -->
+      <article class="post-card">
+        <div class="post-header">
+          <div class="author-wrapper">
+            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&q=80" class="avatar-img" alt="Rajan Profile">
+            <div class="author-info">
+              <h4>Rajan <i class="fa-solid fa-circle-check verified-badge"></i></h4>
+              <p>Software Architect • 2 hours ago</p>
+            </div>
+          </div>
+          <button class="icon-btn"><i class="fa-solid fa-ellipsis"></i></button>
+        </div>
+        
+        <p class="post-body">
+          Finalized the architecture requirements for the upcoming Library Management System iteration. We've streamlined authentication, catalog searching, and auto-fine calculations into microservices.
+        </p>
+
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" class="post-media" alt="Code Screenshot">
+
+        <div class="post-actions">
+          <button class="action-link"><i class="fa-regular fa-thumbs-up"></i> 48 Likes</button>
+          <button class="action-link"><i class="fa-regular fa-message"></i> 12 Comments</button>
+          <button class="action-link"><i class="fa-regular fa-bookmark"></i> Save</button>
+        </div>
+      </article>
+
+    </main>
+
+    <!-- Right Insights Panel -->
+    <aside class="widgets-panel">
+      
+      <div class="panel-box">
+        <div class="panel-header">
+          <span class="panel-title">Recommended Peers</span>
+          <i class="fa-solid fa-arrow-trend-up" style="color: var(--text-muted); font-size: 0.8rem;"></i>
+        </div>
+
+        <div class="network-item">
+          <div class="network-user">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Elena">
+            <div class="network-details">
+              <h5>Elena Rostova</h5>
+              <p>Product Designer</p>
+            </div>
+          </div>
+          <button class="btn-outline">Connect</button>
+        </div>
+
+        <div class="network-item">
+          <div class="network-user">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Marcus">
+            <div class="network-details">
+              <h5>Marcus Vance</h5>
+              <p>DevOps Engineer</p>
+            </div>
+          </div>
+          <button class="btn-outline">Connect</button>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+</body>
+</html>
