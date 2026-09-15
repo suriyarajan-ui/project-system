@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Complaint Management System</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-shell">
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar" id="sidebar">
+
+            <!-- Logo / Brand -->
+            <div class="brand">
+
+                <div class="brand-mark">
+                    CM
+                </div>
+
+                <div>
+                    <h1>Complaint Management</h1>
+                    <span>College Management System</span>
+                </div>
+
+            </div>
+
+
+            <!-- Navigation -->
+            <nav class="sidebar-nav">
+
+                <p class="nav-label">USER</p>
+
+                <button
+                    class="nav-item active"
+                    data-section="auth"
+                    type="button">
+
+                    <span class="nav-icon">⇥</span>
+                    <span>Registration & Login</span>
+
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-section="submit"
+                    type="button">
+
+                    <span class="nav-icon">＋</span>
+                    <span>Submit Complaint</span>
+
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-section="my-complaints"
+                    type="button">
+
+                    <span class="nav-icon">☷</span>
+                    <span>My Complaints</span>
+
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-section="search"
+                    type="button">
+
+                    <span class="nav-icon">⌕</span>
+                    <span>Search by Complaint ID</span>
+
+                </button>
+
+
+                <p class="nav-label admin-label">
+                    ADMINISTRATOR
+                </p>
+
+
+                <button
+                    class="nav-item"
+                    data-section="admin-management"
+                    type="button">
+
+                    <span class="nav-icon">▣</span>
+                    <span>Complaint Management</span>
+
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-section="admin-dashboard"
+                    type="button">
+
+                    <span class="nav-icon">▥</span>
+                    <span>Complaint Statistics</span>
+
+                </button>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main class="main-content">
+
+
+            <!-- ================= HEADER ================= -->
+            <header class="topbar">
+
+                <!-- Mobile Menu -->
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu"
+                    type="button"
+                    aria-label="Open navigation">
+
+                    ☰
+
+                </button>
+
+
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+
+                    <span>
+                        Complaint Management System
+                    </span>
+
+                    <span class="separator">
+                        /
+                    </span>
+
+                    <strong id="breadcrumbTitle">
+                        Registration & Login
+                    </strong>
+
+                </div>
+
+
+                <!-- User Profile -->
+                <div class="profile-area">
+
+                    <div class="profile-avatar">
+                        U
+                    </div>
+
+                    <div class="profile-text">
+
+                        <strong>
+                            System User
+                        </strong>
+
+                        <span>
+                            User
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- ================= PAGE CONTENT ================= -->
+
+            <div class="content">
+
+
+                <!-- ==================================================
+                     1. REGISTRATION & LOGIN
+                =================================================== -->
+
+                <section
+                    class="page-section active"
+                    id="auth">
+
+                    <div class="page-heading">
+
+                        <div>
+
+                            <p class="eyebrow">
+                                USER ACCESS
+                            </p>
+
+                            <h2>
+                                Registration & Login
+                            </h2>
+
+                            <p>
+                                Register an account or log in to
+                                access the complaint management system.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="auth-grid">
+
+
+                        <!-- Login / Registration Form -->
+
+                        <div class="panel auth-panel">
+
+                            <div class="panel-heading">
+
+                                <div>
+
+                                    <h3 id="authTitle">
+                                        Login
+                                    </h3>
+
+                                    <p id="authDescription">
+                                        Log in to access the system.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <form id="authForm">
+
+
+                                <!-- Name - Registration Only -->
+
+                                <div
+                                    class="form-group register-field hidden">
+
+                                    <label for="registerName">
+                                        Name
+                                    </label>
+
+                                    <input
+                                        id="registerName"
+                                        type="text"
+                                        placeholder="Enter your name">
+
+                                </div>
+
+
+                                <!-- Email / Username -->
+
+                                <div class="form-group">
+
+                                    <label for="authEmail">
+                                        Email / Username
+                                    </label>
+
+                                    <input
+                                        id="authEmail"
+                                        type="text"
+                                        placeholder="Enter your email or username">
+
+                                </div>
+
+
+                                <!-- Password -->
+
+                                <div class="form-group">
+
+                                    <label for="authPassword">
+                                        Password
+                                    </label>
+
+                                    <input
+                                        id="authPassword"
+                                        type="password"
+                                        placeholder="Enter your password">
+
+                                </div>
+
+
+                                <!-- Error Message -->
+
+                                <p
+                                    class="form-message"
+                                    id="authMessage">
+                                </p>
+
+
+                                <!-- Login / Register Button -->
+
+                                <button
+                                    class="primary-btn full-width"
+                                    id="authSubmit"
+                                    type="submit">
+
+                                    Log In
+
+                                </button>
+
+                            </form>
+
+
+                            <!-- Toggle Login / Register -->
+
+                            <button
+                                class="text-btn"
+                                id="toggleAuth"
+                                type="button">
+
+                                Need an account? Register
+
+                            </button>
+
+                        </div>
+
+
+                        <!-- System Access Information -->
+
+                        <div class="panel access-panel">
+
+                            <div class="access-icon">
+                                ✓
+                            </div>
+
+                            <h3>
+                                System Access
+                            </h3>
+
+                            <p>
+                                Use your account to access complaint
+                                submission, submitted complaints,
+                                and complaint search.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- ==================================================
+                     2. SUBMIT COMPLAINT
+                =================================================== -->
+
+                <section
+                    class="page-section"
+                    id="submit">
+
+                    <div class="page-heading">
+
+                        <div>
+
+                            <p class="eyebrow">
+                                USER MODULE
+                            </p>
+
+                            <h2>
+                                Submit Complaint
+                            </h2>
+
+                            <p>
+                                Enter the complaint information
+                                and submit it through the system.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel form-panel">
+
+
+                        <div class="panel-heading">
+
+                            <div>
+
+                                <h3>
+                                    Complaint Information
+                                </h3>
+
+                                <p>
+                                    Complete the form to submit a complaint.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <form id="complaintForm">
+
+
+                            <div class="form-grid">
+
+
+                                <!-- Subject -->
+
+                                <div class="form-group">
+
+                                    <label for="complaintSubject">
+                                        Complaint Subject
+                                    </label>
+
+                                    <input
+                                        id="complaintSubject"
+                                        type="text"
+                                        placeholder="Enter complaint subject"
+                                        required>
+
+                                </div>
+
+
+                                <!-- Category -->
+
+                                <div class="form-group">
+
+                                    <label for="complaintCategory">
+                                        Complaint Category
+                                    </label>
+
+                                    <input
+                                        id="complaintCategory"
+                                        type="text"
+                                        placeholder="Enter complaint category"
+                                        required>
+
+                                </div>
+
+
+                                <!-- Complaint Details -->
+
+                                <div
+                                    class="form-group full-span">
+
+                                    <label for="complaintDescription">
+                                        Complaint Details
+                                    </label>
+
+                                    <textarea
+                                        id="complaintDescription"
+                                        rows="6"
+                                        placeholder="Enter complaint details"
+                                        required></textarea>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Error Message -->
+
+                            <p
+                                class="form-message"
+                                id="complaintMessage">
+                            </p>
+
+
+                            <!-- Submit -->
+
+                            <button
+                                class="primary-btn"
+                                type="submit">
+
+                                Submit Complaint
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- ==================================================
+                     3. MY COMPLAINTS
+                =================================================== -->
+
+                <section
+                    class="page-section"
+                    id="my-complaints">
+
+                    <div class="page-heading">
+
+                        <div>
+
+                            <p class="eyebrow">
+                                USER MODULE
+                            </p>
+
+                            <h2>
+                                My Complaints
+                            </h2>
+
+                            <p>
+                                View complaints submitted by the
+                                current user.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+
+                        <div class="table-toolbar">
+
+                            <div>
+
+                                <h3>
+                                    Submitted Complaints
+                                </h3>
+
+                                <p class="muted">
+                                    Mock data for frontend demonstration.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="table-wrap">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Complaint ID
+                                        </th>
+
+                                        <th>
+                                            Subject
+                                        </th>
+
+                                        <th>
+                                            Category
+                                        </th>
+
+                                        <th>
+                                            Status
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody id="myComplaintsTable">
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- ==================================================
+                     4. SEARCH COMPLAINT
+                =================================================== -->
+
+                <section
+                    class="page-section"
+                    id="search">
+
+                    <div class="page-heading">
+
+                        <div>
+
+                            <p class="eyebrow">
+                                USER MODULE
+                            </p>
+
+                            <h2>
+                                Search Complaint by ID
+                            </h2>
+
+                            <p>
+                                Find a specific complaint using
+                                its complaint ID.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel search-panel">
+
+
+                        <form
+                            id="searchForm"
+                            class="search-form">
+
+
+                            <div class="form-group">
+
+                                <label for="searchId">
+                                    Complaint ID
+                                </label>
+
+                                <input
+                                    id="searchId"
+                                    type="text"
+                                    placeholder="Example: CMP-1001"
+                                    required>
+
+                            </div>
+
+
+                            <button
+                                class="primary-btn"
+                                type="submit">
+
+                                Search Complaint
+
+                            </button>
+
+                        </form>
+
+
+                        <!-- Search Result -->
+
+                        <div
+                            id="searchResult"
+                            class="search-result hidden">
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- ==================================================
+                     5. ADMIN COMPLAINT MANAGEMENT
+                =================================================== -->
+
+                <section
+                    class="page-section"
+                    id="admin-management">
+
+                    <div class="page-heading">
+
+                        <div>
+
+                            <p class="eyebrow">
+                                ADMINISTRATOR
+                            </p>
+
+                            <h2>
+                                Complaint Management
+                            </h2>
+
+                            <p>
+                                Manage complaints and update
+                                their status.
+                            </p>
+
+                        </div>
+
+
+                        <span class="admin-badge">
+                            Administrator
+                        </span>
+
+                    </div>
+
+
+                    <div class="panel">
+
+
+                        <div class="table-toolbar">
+
+
+                            <div>
+
+                                <h3>
+                                    Complaints
+                                </h3>
+
+                                <p class="muted">
+                                    Mock data for frontend demonstration.
+                                </p>
+
+                            </div>
+
+
+                            <!-- Complaint ID Filter -->
+
+                            <div class="table-search">
+
+                                <input
+                                    id="adminFilter"
+                                    type="text"
+                                    placeholder="Search complaint ID...">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="table-wrap">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Complaint ID
+                                        </th>
+
+                                        <th>
+                                            Subject
+                                        </th>
+
+                                        <th>
+                                            Category
+                                        </th>
+
+                                        <th>
+                                            Status
+                                        </th>
+
+                                        <th>
+                                            Update Status
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody
+                                    id="adminComplaintsTable">
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- ==================================================
+                     6. ADMIN DASHBOARD
+                =================================================== -->
+
+                <section
+                    class="page-section"
+                    id="admin-dashboard">
+
+
+                    <div class="page-heading">
+
+
+                        <div>
+
+                            <p class="eyebrow">
+                                ADMINISTRATOR
+                            </p>
+
+                            <h2>
+                                Complaint Statistics
+                            </h2>
+
+                            <p>
+                                Dashboard displaying complaint statistics.
+                            </p>
+
+                        </div>
+
+
+                        <span class="admin-badge">
+                            Administrator
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- ================= SUMMARY CARDS ================= -->
+
+                    <div class="summary-grid">
+
+
+                        <!-- Total -->
+
+                        <div class="summary-card">
+
+                            <div class="summary-icon">
+                                ▣
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Total Complaints
+                                </span>
+
+                                <strong id="totalCount">
+                                    0
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Pending -->
+
+                        <div class="summary-card">
+
+                            <div class="summary-icon">
+                                ◷
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Pending
+                                </span>
+
+                                <strong id="pendingCount">
+                                    0
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Resolved -->
+
+                        <div class="summary-card">
+
+                            <div class="summary-icon">
+                                ✓
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Resolved
+                                </span>
+
+                                <strong id="resolvedCount">
+                                    0
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- In Progress -->
+
+                        <div class="summary-card">
+
+                            <div class="summary-icon">
+                                ↻
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    In Progress
+                                </span>
+
+                                <strong id="progressCount">
+                                    0
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ================= DASHBOARD CONTENT ================= -->
+
+                    <div class="dashboard-grid">
+
+
+                        <!-- Complaint Statistics -->
+
+                        <div class="panel">
+
+
+                            <div class="panel-heading">
+
+                                <div>
+
+                                    <h3>
+                                        Complaint Statistics
+                                    </h3>
+
+                                    <p>
+                                        Current mock complaint
+                                        status distribution.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="stat-bars">
+
+
+                                <!-- Pending -->
+
+                                <div class="bar-row">
+
+                                    <div class="bar-label">
+
+                                        <span>
+                                            Pending
+                                        </span>
+
+                                        <strong id="pendingBarValue">
+                                            0
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="bar-track">
+
+                                        <div
+                                            class="bar-fill"
+                                            id="pendingBar">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- In Progress -->
+
+                                <div class="bar-row">
+
+                                    <div class="bar-label">
+
+                                        <span>
+                                            In Progress
+                                        </span>
+
+                                        <strong id="progressBarValue">
+                                            0
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="bar-track">
+
+                                        <div
+                                            class="bar-fill"
+                                            id="progressBar">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Resolved -->
+
+                                <div class="bar-row">
+
+                                    <div class="bar-label">
+
+                                        <span>
+                                            Resolved
+                                        </span>
+
+                                        <strong id="resolvedBarValue">
+                                            0
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="bar-track">
+
+                                        <div
+                                            class="bar-fill"
+                                            id="resolvedBar">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- Complaint Overview -->
+
+                        <div class="panel">
+
+
+                            <div class="panel-heading">
+
+                                <div>
+
+                                    <h3>
+                                        Complaint Overview
+                                    </h3>
+
+                                    <p>
+                                        Mock records available
+                                        in the frontend.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="overview-list">
+
+
+                                <div>
+
+                                    <span>
+                                        Submitted complaints
+                                    </span>
+
+                                    <strong id="overviewTotal">
+                                        0
+                                    </strong>
+
+                                </div>
+
+
+                                <div>
+
+                                    <span>
+                                        Pending complaints
+                                    </span>
+
+                                    <strong id="overviewPending">
+                                        0
+                                    </strong>
+
+                                </div>
+
+
+                                <div>
+
+                                    <span>
+                                        In-progress complaints
+                                    </span>
+
+                                    <strong id="overviewProgress">
+                                        0
+                                    </strong>
+
+                                </div>
+
+
+                                <div>
+
+                                    <span>
+                                        Resolved complaints
+                                    </span>
+
+                                    <strong id="overviewResolved">
+                                        0
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- Toast Message -->
+
+    <div
+        class="toast"
+        id="toast">
+    </div>
+
+
+    <!-- JavaScript -->
+    <script src="react.js"></script>
+
+</body>
+
+</html>
